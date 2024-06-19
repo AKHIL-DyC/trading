@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Loss Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        label, input, button {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>BankNIFTY Option Trading Stop Loss Calculator</h1>
+    <label for="buyPrice">Enter Buy Price:</label>
+    <input type="number" id="buyPrice" placeholder="Enter buy price">
+    
+    <label for="profitTarget">Enter Profit Target:</label>
+    <input type="number" id="profitTarget" placeholder="Enter profit target">
+    
+    <label for="lossTarget">Enter Loss Target:</label>
+    <input type="number" id="lossTarget" placeholder="Enter loss target">
+    
+    <button onclick="calculateStopLoss()">Calculate</button>
+
+    <h2>Results</h2>
+    <p id="profitStopLoss">Profit Stop Loss: </p>
+    <p id="lossStopLoss">Loss Stop Loss: </p>
+
+    <script>
+        function calculateStopLoss() {
+            const lotSize = 15;
+
+            let buyPrice = document.getElementById('buyPrice').value;
+            let profitTarget = document.getElementById('profitTarget').value;
+            let lossTarget = document.getElementById('lossTarget').value;
+
+            if (!buyPrice || !profitTarget || !lossTarget) {
+                alert("Please enter all values.");
+                return;
+            }
+
+            buyPrice = parseFloat(buyPrice);
+            profitTarget = parseFloat(profitTarget);
+            lossTarget = parseFloat(lossTarget);
+
+            const profitStopLoss = buyPrice + (profitTarget / lotSize);
+            const lossStopLoss = buyPrice - (lossTarget / lotSize);
+
+            document.getElementById('profitStopLoss').innerText = `Profit Stop Loss: ${profitStopLoss.toFixed(2)}`;
+            document.getElementById('lossStopLoss').innerText = `Loss Stop Loss: ${lossStopLoss.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
